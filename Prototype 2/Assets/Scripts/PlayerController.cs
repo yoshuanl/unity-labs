@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public float horizontalInput;
     public float speed = 10.0f;
-    public float xRange = 15.0f;
+    public float xRange = 20.0f;
 
     public GameObject projecttilePrefab;
     private Vector3 tileStartPosition = new Vector3(0, 1, 1);
