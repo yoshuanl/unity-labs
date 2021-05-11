@@ -14,7 +14,7 @@ public class FollowPlayer : MonoBehaviour
         offset = transform.position - player.transform.position;
     }
 
-    // Update is called once per frame
+    // LateUpdate is called every frame after all Update functions have been called
     void LateUpdate()
     {
         // offset the camera to be always behind the vehicle
