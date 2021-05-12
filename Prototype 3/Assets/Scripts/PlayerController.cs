@@ -6,9 +6,10 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
     private Animator playerAnim;
+    public ParticleSystem explosionPart;
 
     private float jumpForce = 500.0f;
-    private float gravityModifier = 2.5f;
+    private float gravityModifier = 3f;
     private bool isOnGround = true;
     public bool isGameOver = false;
 
@@ -29,7 +30,7 @@ public class PlayerController : MonoBehaviour
         {
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
-            playerAnim.SetTrigger("Jump_trig");
+            playerAnim.SetTrigger("Jump_trig"); // play jump animation
         }
 
     }
@@ -44,8 +45,9 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log("GAME OVER");
             isGameOver = true;
-            playerAnim.SetBool("Death_b", true);
+            playerAnim.SetBool("Death_b", true); // play fall down animation
             playerAnim.SetInteger("DeathType_int", 1);
+            explosionPart.Play(); // play smoke animation
         }
     }
 }
