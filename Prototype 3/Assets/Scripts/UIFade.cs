@@ -8,6 +8,7 @@ public class UIFade : MonoBehaviour
     public static UIFade instance;
 
     public Image fadeScreen;
+    public Text fadeText;
     private float fadeSpeed;
 
     private bool shouldFadeToBlack;
@@ -28,6 +29,7 @@ public class UIFade : MonoBehaviour
             // more powerful/ faster machine would have smaller Time.deltaTime
             // multiply fadespeed with it makes the UI experience in different computer similar
             fadeScreen.color = new Color(fadeScreen.color.r, fadeScreen.color.g, fadeScreen.color.b, Mathf.MoveTowards(fadeScreen.color.a, 1f, fadeSpeed * Time.deltaTime));
+            fadeText.color = new Color(fadeText.color.r, fadeText.color.g, fadeText.color.b, Mathf.MoveTowards(fadeText.color.a, 1f, fadeSpeed * Time.deltaTime));
             if (fadeScreen.color.a == 1f)
             {
                 shouldFadeToBlack = false;
