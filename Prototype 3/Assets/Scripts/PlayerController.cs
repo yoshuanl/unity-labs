@@ -5,8 +5,9 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody playerRb;
+    private Animator playerAnim;
 
-    private float jumpForce = 10.0f;
+    private float jumpForce = 500.0f;
     private float gravityModifier = 2.5f;
     private bool isOnGround = true;
     public bool isGameOver = false;
@@ -15,6 +16,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
+        playerAnim = GetComponent<Animator>();
+
         Physics.gravity *= gravityModifier;
 
     }
@@ -26,6 +29,7 @@ public class PlayerController : MonoBehaviour
         {
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
+            playerAnim.SetTrigger("Jump_trig");
         }
 
     }
