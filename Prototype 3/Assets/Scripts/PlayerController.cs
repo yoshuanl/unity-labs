@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
     private Animator playerAnim;
     public ParticleSystem explosionPart;
+    public ParticleSystem dirtPart;
 
     private float jumpForce = 500.0f;
     private float gravityModifier = 3f;
@@ -31,6 +32,7 @@ public class PlayerController : MonoBehaviour
             playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             isOnGround = false;
             playerAnim.SetTrigger("Jump_trig"); // play jump animation
+            dirtPart.Stop(); // stop dirt when jump
         }
 
     }
@@ -40,6 +42,7 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.CompareTag("Ground"))
         {
             isOnGround = true;
+            dirtPart.Play(); // restart dirt when land
         }
         else if (other.gameObject.CompareTag("Obstacle"))
         {
@@ -48,6 +51,7 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetBool("Death_b", true); // play fall down animation
             playerAnim.SetInteger("DeathType_int", 1);
             explosionPart.Play(); // play smoke animation
+            dirtPart.Stop(); // stop dirt when dead
         }
     }
 }
