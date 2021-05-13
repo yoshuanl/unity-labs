@@ -7,6 +7,7 @@ public class Target : MonoBehaviour
     private Rigidbody targetRb;
     private GameManager gameManager;
 
+    public int targetScore;
     private float minSpeed = 12;
     private float maxSpeed = 18;
     private float maxTorque = 10;
@@ -51,7 +52,7 @@ public class Target : MonoBehaviour
     private void OnMouseDown()
     {
         Destroy(gameObject);
-        gameManager.UpdateScore(5);
+        gameManager.UpdateScore(targetScore);
     }
 
     // the only trigger we have here is the sensor beneath
