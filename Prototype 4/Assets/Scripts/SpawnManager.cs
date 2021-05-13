@@ -20,6 +20,7 @@ public class SpawnManager : MonoBehaviour
 
     }
 
+    // GenerateSpawnPosition generate position to instantiate enemy
     private Vector3 GenerateSpawnPosition()
     {
         float xPos = Random.Range(-spawnRange, spawnRange);

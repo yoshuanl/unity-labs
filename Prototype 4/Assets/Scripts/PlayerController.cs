@@ -33,16 +33,18 @@ public class PlayerController : MonoBehaviour
         {
             Powerup(true);
             Destroy(other.gameObject);
-            StartCoroutine(CountdownRoutine());
+            StartCoroutine(CountdownRoutine()); // start a new thread
         }
     }
 
+    // CountdownRoutine countdown the powerup
     IEnumerator CountdownRoutine()
     {
         yield return new WaitForSeconds(8);
         Powerup(false);
     }
 
+    // Powerup turn on/off the power
     private void Powerup(bool power)
     {
         powerupIndicator.gameObject.SetActive(power);
