@@ -10,7 +10,7 @@ public class Target : MonoBehaviour
     private float maxSpeed = 18;
     private float maxTorque = 10;
     private float xRange = 4;
-    private float ySpawn = -6;
+    private float ySpawn = -2;
 
 
     // Start is called before the first frame update
@@ -43,6 +43,18 @@ public class Target : MonoBehaviour
     float RandomTorque()
     {
         return Random.Range(-maxTorque, maxTorque);
+    }
+
+    // destroy target when click on it
+    private void OnMouseDown()
+    {
+        Destroy(gameObject);
+    }
+
+    // the only trigger we have here is the sensor beneath
+    private void OnTriggerEnter(Collider other)
+    {
+        Destroy(gameObject);
     }
 
 
