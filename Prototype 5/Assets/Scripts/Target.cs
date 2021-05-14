@@ -10,7 +10,7 @@ public class Target : MonoBehaviour
     public ParticleSystem explosionParticle;
     public int targetScore;
     private float minSpeed = 12;
-    private float maxSpeed = 18;
+    private float maxSpeed = 16;
     private float maxTorque = 10;
     private float xRange = 4;
     private float ySpawn = -2;
