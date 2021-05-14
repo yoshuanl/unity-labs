@@ -52,9 +52,12 @@ public class Target : MonoBehaviour
     // destroy target when click on it
     private void OnMouseDown()
     {
-        Destroy(gameObject);
-        Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
-        gameManager.UpdateScore(targetScore);
+        if (gameManager.isGameActive)
+        {
+            Destroy(gameObject);
+            Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+            gameManager.UpdateScore(targetScore);
+        }
     }
 
     // the only trigger we have here is the sensor beneath
