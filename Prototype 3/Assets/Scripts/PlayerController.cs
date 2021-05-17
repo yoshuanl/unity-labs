@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public bool isGameOver = false;
     private int jumped = 0;
     public int jumpLimit = 2;
+    public bool isDashing = false;
 
     // Start is called before the first frame update
     void Start()
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // jump
         if (Input.GetKeyDown(KeyCode.Space) && !isGameOver)
         {
             if (isOnGround)
@@ -56,6 +58,24 @@ public class PlayerController : MonoBehaviour
                 playerAudio.PlayOneShot(jumpSound); // play jump audio once
             }
         }
+
+        // dash
+        else if (Input.GetKeyDown(KeyCode.D) && isOnGround && !isGameOver)
+        {
+            isDashing = !isDashing;
+            if (isDashing)
+            {
+                playerAnim.SetFloat("Speed_f", 1.0f);
+                playerAnim.SetFloat("Head_Vertical_f", -0.3f);
+            }
+            else
+            {
+                playerAnim.SetFloat("Speed_f", 0.5f);
+                playerAnim.SetFloat("Head_Vertical_f", 0.0f);
+            }
+
+        }
+
 
     }
 
