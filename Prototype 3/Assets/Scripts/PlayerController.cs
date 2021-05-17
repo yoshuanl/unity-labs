@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     private float gravityModifier = 3f;
     private bool isOnGround = true;
     public bool isGameOver = false;
+    private int jumped = 0;
+    public int jumpLimit = 2;
 
     // Start is called before the first frame update
     void Start()
@@ -34,13 +36,25 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isOnGround && !isGameOver)
+        if (Input.GetKeyDown(KeyCode.Space) && !isGameOver)
         {
-            playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isOnGround = false;
-            playerAnim.SetTrigger("Jump_trig"); // play jump animation
-            playerAudio.PlayOneShot(jumpSound); // play jump audio once
-            dirtPart.Stop(); // stop dirt when jump
+            if (isOnGround)
+            {
+                isOnGround = false;
+                jumped++;
+
+                playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                playerAnim.SetTrigger("Jump_trig"); // play jump animation
+                playerAudio.PlayOneShot(jumpSound); // play jump audio once
+                dirtPart.Stop(); // stop dirt when jump
+            }
+            else if (jumped < jumpLimit)
+            {
+                jumped++;
+
+                playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                playerAudio.PlayOneShot(jumpSound); // play jump audio once
+            }
         }
 
     }
@@ -51,6 +65,7 @@ public class PlayerController : MonoBehaviour
         {
             isOnGround = true;
             dirtPart.Play(); // restart dirt when land
+            jumped = 0;
         }
         else if (other.gameObject.CompareTag("Obstacle"))
         {
