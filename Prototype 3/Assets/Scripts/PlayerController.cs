@@ -68,12 +68,12 @@ public class PlayerController : MonoBehaviour
 
                 if (isDashing)
                 {
-                    playerAnim.SetFloat("Speed_f", 1.0f);
+                    playerAnim.SetFloat("Speed_Multiplier", 1.5f);
                     playerAnim.SetFloat("Head_Vertical_f", -0.3f);
                 }
                 else
                 {
-                    playerAnim.SetFloat("Speed_f", 0.5f);
+                    playerAnim.SetFloat("Speed_Multiplier", 1.0f);
                     playerAnim.SetFloat("Head_Vertical_f", 0.0f);
                 }
             }
@@ -90,7 +90,6 @@ public class PlayerController : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Obstacle"))
         {
-            Debug.Log("GAME OVER");
             isGameOver = true;
             playerAnim.SetBool("Death_b", true); // play fall down animation
             playerAnim.SetInteger("DeathType_int", 1);
