@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public bool isGameOver = false;
     private int jumped = 0;
     public int jumpLimit = 2;
+    public bool isDashing = false;
 
     // Start is called before the first frame update
     void Start()
@@ -36,27 +37,47 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !isGameOver)
+        if (!isGameOver)
         {
-            if (isOnGround)
+            // jump
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                isOnGround = false;
-                jumped++;
+                if (isOnGround)
+                {
+                    isOnGround = false;
+                    jumped++;
 
-                playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                playerAnim.SetTrigger("Jump_trig"); // play jump animation
-                playerAudio.PlayOneShot(jumpSound); // play jump audio once
-                dirtPart.Stop(); // stop dirt when jump
+                    playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                    playerAnim.SetTrigger("Jump_trig"); // play jump animation
+                    playerAudio.PlayOneShot(jumpSound); // play jump audio once
+                    dirtPart.Stop(); // stop dirt when jump
+                }
+                else if (jumped < jumpLimit)
+                {
+                    jumped++;
+
+                    playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                    playerAudio.PlayOneShot(jumpSound); // play jump audio once
+                }
             }
-            else if (jumped < jumpLimit)
-            {
-                jumped++;
 
-                playerRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                playerAudio.PlayOneShot(jumpSound); // play jump audio once
+            // dash
+            else if (Input.GetKeyDown(KeyCode.D))
+            {
+                isDashing = !isDashing;
+
+                if (isDashing)
+                {
+                    playerAnim.SetFloat("Speed_f", 1.0f);
+                    playerAnim.SetFloat("Head_Vertical_f", -0.3f);
+                }
+                else
+                {
+                    playerAnim.SetFloat("Speed_f", 0.5f);
+                    playerAnim.SetFloat("Head_Vertical_f", 0.0f);
+                }
             }
         }
-
     }
 
     private void OnCollisionEnter(Collision other)
