@@ -22,6 +22,7 @@ public class PlayerController : MonoBehaviour
     private int jumped = 0;
     public int jumpLimit = 2;
     public bool isDashing = false;
+    public string animSpeedMultiplierName = "Speed_Multiplier";
 
     // Start is called before the first frame update
     void Start()
@@ -68,12 +69,12 @@ public class PlayerController : MonoBehaviour
 
                 if (isDashing)
                 {
-                    playerAnim.SetFloat("Speed_Multiplier", 1.5f);
+                    playerAnim.SetFloat(animSpeedMultiplierName, 1.5f);
                     playerAnim.SetFloat("Head_Vertical_f", -0.3f);
                 }
                 else
                 {
-                    playerAnim.SetFloat("Speed_Multiplier", 1.0f);
+                    playerAnim.SetFloat(animSpeedMultiplierName, 1.0f);
                     playerAnim.SetFloat("Head_Vertical_f", 0.0f);
                 }
             }
