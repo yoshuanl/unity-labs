@@ -433,7 +433,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ceff4204e428419cab208150a61caf2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyPrefab: {fileID: 806945551347912246, guid: c2a474eee0de04b19aaf20fb9e2e091c, type: 3}
+  enemyPrefabs:
+  - {fileID: 806945551347912246, guid: c2a474eee0de04b19aaf20fb9e2e091c, type: 3}
+  - {fileID: 6784757474695193746, guid: 1b00aaf2542f940fbb849a3a7545b7a7, type: 3}
+  - {fileID: 2969696252915321341, guid: 871fddd47f24b465bbb9f5b2d1933c6b, type: 3}
   powerupPrefab: {fileID: 3805869165825484481, guid: d8e56082f0c7645fba1c56b3209bc6da, type: 3}
 --- !u!4 &1096497637
 Transform:

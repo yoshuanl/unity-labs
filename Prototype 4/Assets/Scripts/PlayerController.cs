@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private float speed = 10.0f;
+    private float speed = 15.0f;
     private bool hasPowerup = false;
-    private float powerupStrength = 20.0f;
+    private float powerupStrength = 30.0f;
 
     public GameObject powerupIndicator;
     private Rigidbody playerRb;
