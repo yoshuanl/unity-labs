@@ -383,7 +383,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 967619315}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 1.2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
@@ -404,6 +404,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerupIndicator: {fileID: 906894848}
+  currentPowerUp: 0
+  missilePrefab: {fileID: 3330149494505417731, guid: 1ae5f12bc2f924a3e8a77032896fe3d4, type: 3}
 --- !u!1 &1096497635
 GameObject:
   m_ObjectHideFlags: 0
@@ -437,7 +439,9 @@ MonoBehaviour:
   - {fileID: 806945551347912246, guid: c2a474eee0de04b19aaf20fb9e2e091c, type: 3}
   - {fileID: 6784757474695193746, guid: 1b00aaf2542f940fbb849a3a7545b7a7, type: 3}
   - {fileID: 2969696252915321341, guid: 871fddd47f24b465bbb9f5b2d1933c6b, type: 3}
-  powerupPrefab: {fileID: 3805869165825484481, guid: d8e56082f0c7645fba1c56b3209bc6da, type: 3}
+  powerupPrefabs:
+  - {fileID: 375012248461703270, guid: 98ef0d57131614ae4bde8fe406135a80, type: 3}
+  - {fileID: 3805869165825484481, guid: d8e56082f0c7645fba1c56b3209bc6da, type: 3}
 --- !u!4 &1096497637
 Transform:
   m_ObjectHideFlags: 0
