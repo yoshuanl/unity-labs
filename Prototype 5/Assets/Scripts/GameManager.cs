@@ -8,12 +8,14 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public GameObject titleScreen;
+    public GameObject pauseScreen;
     public List<GameObject> targets;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI livesText;
     public TextMeshProUGUI gameOverText;
     public Button restartButton;
 
+    private bool paused;
     private float spawnRate = 1;
     public bool isGameActive = true;
     private int score = 0;
@@ -29,7 +31,11 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        // pause if user press P
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            ChangePaused();
+        }
     }
 
     IEnumerator SpawnTarget()
@@ -79,5 +85,21 @@ public class GameManager : MonoBehaviour
 
         UpdateScore(0);
         UpdateLives(3);
+    }
+
+    private void ChangePaused()
+    {
+        if (!paused)
+        {
+            paused = true;
+            pauseScreen.SetActive(true);
+            Time.timeScale = 0; // so physics calculations are paused
+        }
+        else
+        {
+            paused = false;
+            pauseScreen.SetActive(false);
+            Time.timeScale = 1;
+        }
     }
 }
