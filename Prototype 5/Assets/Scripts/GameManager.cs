@@ -93,13 +93,16 @@ public class GameManager : MonoBehaviour
         {
             paused = true;
             pauseScreen.SetActive(true);
-            Time.timeScale = 0; // so physics calculations are paused
+            isGameActive = false;
+            // Time.timeScale = 0; // so physics calculations are paused
         }
         else
         {
             paused = false;
             pauseScreen.SetActive(false);
-            Time.timeScale = 1;
+            isGameActive = true;
+            StartCoroutine(SpawnTarget());
+            //Time.timeScale = 1;
         }
     }
 }

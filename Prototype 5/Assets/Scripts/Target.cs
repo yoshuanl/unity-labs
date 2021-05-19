@@ -49,6 +49,7 @@ public class Target : MonoBehaviour
         return Random.Range(-maxTorque, maxTorque);
     }
 
+    /*
     // destroy target when click on it
     private void OnMouseDown()
     {
@@ -58,7 +59,7 @@ public class Target : MonoBehaviour
             Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
             gameManager.UpdateScore(targetScore);
         }
-    }
+    }*/
 
     // the only trigger we have here is the sensor beneath
     private void OnTriggerEnter(Collider other)
@@ -70,5 +71,14 @@ public class Target : MonoBehaviour
         }
     }
 
+    public void DestroyTarget()
+    {
+        if (gameManager.isGameActive)
+        {
+            Destroy(gameObject);
+            Instantiate(explosionParticle, transform.position, explosionParticle.transform.rotation);
+            gameManager.UpdateScore(targetScore);
+        }
+    }
 
 }
