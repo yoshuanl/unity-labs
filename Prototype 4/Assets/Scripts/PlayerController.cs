@@ -12,10 +12,20 @@ public class PlayerController : MonoBehaviour
     private Rigidbody playerRb;
     private GameObject focalPoint;
 
+    // for shooting star
     public PowerUpType currentPowerUp = PowerUpType.None;
     public GameObject missilePrefab;
     private GameObject tmpMissile; // used for spawning stars
     private Coroutine powerupCountdown;
+
+    // for smash
+    public float hangTime;
+    public float smashSpeed;
+    public float explosionForce;
+    public float explosionRadius;
+    private bool smashing = false;
+    private float floorY;
+
 
     // Start is called before the first frame update
     void Start()
@@ -31,12 +41,20 @@ public class PlayerController : MonoBehaviour
         playerRb.AddForce(focalPoint.transform.forward * forwardInput * speed);
         powerupIndicator.transform.position = transform.position + new Vector3(0, -0.5f, 0);
 
-        // launch missiles if current powerup type is "ShootingStar"
+        // launch missiles
         if (currentPowerUp == PowerUpType.ShootingStar && Input.GetKeyDown(KeyCode.F))
         {
-            Debug.Log("F Key!");
             LaunchMissiles();
         }
+
+        // smash
+        if (currentPowerUp == PowerUpType.Smash && Input.GetKeyDown(KeyCode.Space) && !smashing)
+        {
+            smashing = true;
+            StartCoroutine(Smash());
+        }
+
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -94,5 +112,40 @@ public class PlayerController : MonoBehaviour
             tmpMissile = Instantiate(missilePrefab, transform.position + Vector3.up, Quaternion.identity);
             tmpMissile.GetComponent<ShootingBehavior>().Fire(enemy.transform);
         }
+    }
+
+    IEnumerator Smash()
+    {
+        // store the original y position so we can come back
+        floorY = transform.position.y;
+
+        float jumpTime = Time.time + hangTime;
+
+        // move player up once every frame
+        while (Time.time < jumpTime)
+        {
+            playerRb.velocity = new Vector2(playerRb.velocity.x, smashSpeed);
+            yield return null;
+        }
+
+        // move player down once every frame
+        while (transform.position.y > floorY)
+        {
+            playerRb.velocity = new Vector2(playerRb.velocity.x, -smashSpeed * 2);
+            yield return null;
+        }
+
+        var enemies = FindObjectsOfType<Enemy>();
+
+        // loop through enemies
+        for (int i = 0; i < enemies.Length; i++)
+        {
+            if (enemies[i] != null)
+            {
+                enemies[i].GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position, explosionRadius, 0.0f, ForceMode.Impulse);
+            }
+        }
+
+        smashing = false;
     }
 }

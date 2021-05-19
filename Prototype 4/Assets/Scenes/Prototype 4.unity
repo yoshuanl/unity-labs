@@ -404,8 +404,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerupIndicator: {fileID: 906894848}
-  currentPowerUp: 0
+  currentPowerUp: 3
   missilePrefab: {fileID: 3330149494505417731, guid: 1ae5f12bc2f924a3e8a77032896fe3d4, type: 3}
+  hangTime: 0.3
+  smashSpeed: 10
+  explosionForce: 20
+  explosionRadius: 10
 --- !u!1 &1096497635
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,6 +446,7 @@ MonoBehaviour:
   powerupPrefabs:
   - {fileID: 375012248461703270, guid: 98ef0d57131614ae4bde8fe406135a80, type: 3}
   - {fileID: 3805869165825484481, guid: d8e56082f0c7645fba1c56b3209bc6da, type: 3}
+  - {fileID: 8179213577950447769, guid: 2de178e432e354288bf81c7a0ff3339c, type: 3}
 --- !u!4 &1096497637
 Transform:
   m_ObjectHideFlags: 0
